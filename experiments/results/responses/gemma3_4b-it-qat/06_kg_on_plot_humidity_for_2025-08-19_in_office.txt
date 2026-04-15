@@ -1,0 +1,1 @@
+Outside safe limit. The humidity readings dipped below 30% at 16:00, exceeding the recommended range of 30.0 to 60.0.

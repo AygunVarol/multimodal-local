@@ -1,0 +1,3 @@
+Within safe limit.
+
+The temperature fluctuated between approximately 21.0°C and 22.3°C, which is generally within a safe indoor range (typically considered between 21°C to 24°C).

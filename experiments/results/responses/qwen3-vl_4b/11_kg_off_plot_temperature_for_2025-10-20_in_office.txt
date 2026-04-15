@@ -1,0 +1,2 @@
+outside safe limit  
+The chart shows a significant peak in temperature reaching approximately 22.8°C, which is above typical safe limits (e.g., 22.5°C) for office environments. This spike indicates readings exceeded safe limits during the period around 13:00–15:00.

@@ -1,0 +1,2 @@
+within safe limit  
+The chart shows humidity readings ranging from approximately 25% to 29.5% (peaking near 29.5%), all below a typical safe limit of 30% for comfortable indoor environments (or as assumed contextually). Thus, no readings exceeded the safe limit.

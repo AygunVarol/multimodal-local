@@ -1,0 +1,2 @@
+
+The readings stayed within the safe limit throughout the entire day. The line representing the humidity levels does not cross any of the red lines that indicate unsafe limits.

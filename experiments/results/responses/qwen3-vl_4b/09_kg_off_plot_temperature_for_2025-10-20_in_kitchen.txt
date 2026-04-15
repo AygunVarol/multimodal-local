@@ -1,0 +1,2 @@
+within safe limit  
+The temperature readings range from approximately 21.00°C to 22.00°C, with the highest point reaching exactly 22.00°C (the top of the chart). Assuming the "safe limit" is 22.00°C (a common threshold for indoor comfort in many contexts), all readings stay within or at the safe limit.

@@ -1,0 +1,3 @@
+**Within safe limit.**
+
+The humidity readings mostly stayed between **30% and 60%** throughout the day, except for a brief spike above 65% around **15:00–16:00**, which was quickly corrected.

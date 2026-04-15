@@ -1,0 +1,1 @@
+Outside safe limit. The temperature fluctuated above 28 C at 13:00, triggering the ventilation policy.

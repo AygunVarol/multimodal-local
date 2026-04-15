@@ -1,0 +1,3 @@
+**Within safe limit.**
+
+The temperature remained consistently between **20°C and 26°C** throughout the day, never exceeding the recommended range.

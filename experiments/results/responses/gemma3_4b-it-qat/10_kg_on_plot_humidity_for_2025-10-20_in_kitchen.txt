@@ -1,0 +1,1 @@
+Outside safe limit. The humidity rose above 65% at 14:00, which triggers the ventilation policy.

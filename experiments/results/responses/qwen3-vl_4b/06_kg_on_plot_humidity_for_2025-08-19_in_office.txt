@@ -1,0 +1,2 @@
+outside safe limit  
+The chart shows humidity readings dropping below 30% (e.g., around 15:00), which is below the recommended safe range of 30.0–60.0%. While most of the day stays within 30–60%, the dip below 30% makes readings outside safe limit at some points.

@@ -1,0 +1,2 @@
+within safe limit  
+The temperature data (blue dots) falls entirely within the shaded light-blue region (20.0 to 26.0°C), which represents the safe temperature range. No readings exceed 26.0°C or dip below 20.0°C throughout the day.

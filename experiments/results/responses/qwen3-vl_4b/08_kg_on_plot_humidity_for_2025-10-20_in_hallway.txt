@@ -1,0 +1,2 @@
+outside safe limit  
+The chart shows humidity readings dipping below 30.0% (e.g., ~28% at 23:00), which is outside the recommended safe range of 30.0–60.0%. Since the readings were not always within this range, they did not stay within the safe limit.

@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Experiment Evaluation UI</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root {
+      color-scheme: light;
+      --paper: #f6f1e8;
+      --ink: #1f2937;
+      --panel: rgba(255, 255, 255, 0.88);
+      --line: rgba(148, 163, 184, 0.35);
+      --accent: #0f766e;
+      --accent-soft: rgba(15, 118, 110, 0.12);
+    }
+
+    body {
+      font-family: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Georgia, serif;
+      background:
+        radial-gradient(circle at top left, rgba(15, 118, 110, 0.12), transparent 28rem),
+        radial-gradient(circle at bottom right, rgba(217, 119, 6, 0.08), transparent 24rem),
+        linear-gradient(180deg, #fcfaf6 0%, var(--paper) 100%);
+      color: var(--ink);
+    }
+
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
+      backdrop-filter: blur(18px);
+    }
+
+    .scroll-panel {
+      scrollbar-width: thin;
+      scrollbar-color: rgba(100, 116, 139, 0.5) transparent;
+    }
+  </style>
+</head>
+<body class="min-h-screen">
+  <div class="mx-auto min-h-screen max-w-[1800px] p-4 sm:p-6">
+    <header class="mb-4 flex flex-col gap-3 rounded-3xl border border-slate-200/70 bg-white/70 px-5 py-4 shadow-sm backdrop-blur sm:flex-row sm:items-end sm:justify-between">
+      <div>
+        <p class="text-xs uppercase tracking-[0.28em] text-teal-700">Research Evaluation Console</p>
+        <h1 class="mt-1 text-3xl font-semibold text-slate-900">Smart-Environment IoT Paper Results</h1>
+      </div>
+      <div class="grid grid-cols-2 gap-3 text-sm sm:grid-cols-4">
+        <div class="rounded-2xl bg-slate-900 px-4 py-3 text-slate-50">
+          <div class="text-[11px] uppercase tracking-[0.24em] text-slate-300">Files</div>
+          <div id="stat-files" class="mt-2 text-2xl">0</div>
+        </div>
+        <div class="rounded-2xl bg-white px-4 py-3 shadow-sm ring-1 ring-slate-200">
+          <div class="text-[11px] uppercase tracking-[0.24em] text-slate-500">Records</div>
+          <div id="stat-records" class="mt-2 text-2xl text-slate-900">0</div>
+        </div>
+        <div class="rounded-2xl bg-white px-4 py-3 shadow-sm ring-1 ring-slate-200">
+          <div class="text-[11px] uppercase tracking-[0.24em] text-slate-500">Graded</div>
+          <div id="stat-graded" class="mt-2 text-2xl text-slate-900">0</div>
+        </div>
+        <div class="rounded-2xl bg-white px-4 py-3 shadow-sm ring-1 ring-slate-200">
+          <div class="text-[11px] uppercase tracking-[0.24em] text-slate-500">Pending</div>
+          <div id="stat-pending" class="mt-2 text-2xl text-slate-900">0</div>
+        </div>
+      </div>
+    </header>
+
+    <main class="grid min-h-[calc(100vh-11rem)] gap-4 xl:grid-cols-[20rem_minmax(0,1fr)_24rem]">
+      <aside class="panel scroll-panel flex min-h-[18rem] flex-col rounded-3xl p-4">
+        <div class="mb-4 flex items-center justify-between">
+          <div>
+            <h2 class="text-lg font-semibold text-slate-900">Result Files</h2>
+            <p class="text-sm text-slate-600">Grouped by task prefix</p>
+          </div>
+          <button id="refresh-files" class="rounded-full border border-slate-300 px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-slate-700 transition hover:border-teal-500 hover:text-teal-700">Refresh</button>
+        </div>
+        <div id="file-browser" class="space-y-4 overflow-y-auto pr-1"></div>
+      </aside>
+
+      <section class="panel flex min-h-[18rem] flex-col rounded-3xl p-4 sm:p-5">
+        <div class="mb-4 flex flex-col gap-3 border-b border-slate-200 pb-4 lg:flex-row lg:items-end lg:justify-between">
+          <div>
+            <p id="record-file-label" class="text-xs uppercase tracking-[0.26em] text-slate-500">No file selected</p>
+            <h2 id="record-title" class="mt-1 text-2xl font-semibold text-slate-900">Record Viewer</h2>
+          </div>
+          <div class="flex flex-wrap gap-2 text-xs">
+            <span id="record-badge-task" class="rounded-full bg-slate-900 px-3 py-1 font-semibold uppercase tracking-[0.18em] text-white">Task</span>
+            <span id="record-badge-condition" class="rounded-full bg-white px-3 py-1 font-semibold uppercase tracking-[0.18em] text-slate-700 ring-1 ring-slate-300">Condition</span>
+            <span id="record-badge-status" class="rounded-full bg-amber-100 px-3 py-1 font-semibold uppercase tracking-[0.18em] text-amber-800">Pending</span>
+          </div>
+        </div>
+
+        <div id="record-empty" class="flex flex-1 items-center justify-center rounded-3xl border border-dashed border-slate-300 bg-white/60 text-center text-slate-500">
+          Choose a result file to begin grading.
+        </div>
+
+        <div id="record-view" class="hidden flex-1 flex-col gap-4 overflow-visible">
+          <div class="rounded-3xl bg-white/80 p-4 ring-1 ring-slate-200">
+            <div class="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+              <div>
+                <div class="text-[11px] uppercase tracking-[0.24em] text-slate-500">Model</div>
+                <div id="meta-model" class="mt-1 text-base font-semibold text-slate-900">-</div>
+              </div>
+              <div>
+                <div class="text-[11px] uppercase tracking-[0.24em] text-slate-500">Task</div>
+                <div id="meta-task" class="mt-1 text-base font-semibold text-slate-900">-</div>
+              </div>
+              <div>
+                <div class="text-[11px] uppercase tracking-[0.24em] text-slate-500">Condition</div>
+                <div id="meta-condition" class="mt-1 text-base font-semibold text-slate-900">-</div>
+              </div>
+              <div>
+                <div class="text-[11px] uppercase tracking-[0.24em] text-slate-500">Timestamp</div>
+                <div id="meta-timestamp" class="mt-1 text-base font-semibold text-slate-900">-</div>
+              </div>
+            </div>
+          </div>
+
+          <div id="chart-wrap" class="hidden rounded-3xl bg-white/80 p-4 ring-1 ring-slate-200">
+            <div class="mb-3 text-[11px] uppercase tracking-[0.24em] text-slate-500">Chart</div>
+            <img id="chart-image" alt="Chart for review" class="mx-auto max-h-[34rem] w-full rounded-2xl border border-slate-200 bg-white object-contain shadow-sm" />
+          </div>
+
+          <div class="rounded-3xl bg-slate-950 p-4 text-slate-50">
+            <div class="mb-2 text-[11px] uppercase tracking-[0.24em] text-slate-400">Model Response</div>
+            <div id="model-response" class="min-h-[14rem] whitespace-pre-wrap break-words rounded-2xl border border-slate-800 bg-slate-900/70 p-5 text-base leading-8 text-slate-100"></div>
+          </div>
+
+          <div class="grid gap-4 lg:grid-cols-[minmax(0,1fr)_minmax(20rem,30rem)]">
+            <div class="rounded-3xl bg-white/80 p-4 ring-1 ring-slate-200">
+              <div class="mb-2 text-[11px] uppercase tracking-[0.24em] text-slate-500">Question / Prompt</div>
+              <div id="prompt-primary" class="whitespace-pre-wrap text-lg leading-relaxed text-slate-900"></div>
+              <div id="prompt-secondary-wrap" class="mt-4 hidden">
+                <div class="text-[11px] uppercase tracking-[0.24em] text-slate-500">Additional Context</div>
+                <div id="prompt-secondary" class="mt-2 whitespace-pre-wrap text-sm leading-relaxed text-slate-700"></div>
+              </div>
+            </div>
+
+            <div class="rounded-3xl bg-white/80 p-4 ring-1 ring-slate-200">
+              <div class="mb-2 text-[11px] uppercase tracking-[0.24em] text-slate-500">Record Snapshot</div>
+              <pre id="record-json" class="max-h-80 overflow-auto whitespace-pre-wrap break-words rounded-2xl bg-slate-950 p-4 text-xs leading-6 text-slate-100"></pre>
+            </div>
+          </div>
+
+          <div class="rounded-3xl bg-white/80 p-4 ring-1 ring-slate-200">
+            <label for="grade-note" class="text-[11px] uppercase tracking-[0.24em] text-slate-500">Reviewer Note</label>
+            <textarea id="grade-note" class="mt-2 h-24 w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-teal-600 focus:ring-2 focus:ring-teal-100" placeholder="Optional note for this record"></textarea>
+            <div class="mt-4 grid gap-3 sm:grid-cols-[1fr_1fr_auto]">
+              <button id="mark-correct" class="rounded-2xl bg-emerald-600 px-4 py-4 text-lg font-semibold text-white shadow-sm transition hover:bg-emerald-700">CORRECT</button>
+              <button id="mark-incorrect" class="rounded-2xl bg-rose-600 px-4 py-4 text-lg font-semibold text-white shadow-sm transition hover:bg-rose-700">INCORRECT</button>
+              <button id="next-ungraded" class="rounded-2xl border border-slate-300 bg-white px-4 py-4 text-sm font-semibold uppercase tracking-[0.22em] text-slate-700 transition hover:border-teal-500 hover:text-teal-700">Next Ungraded</button>
+            </div>
+            <div class="mt-4 flex flex-wrap items-center justify-between gap-3 border-t border-slate-200 pt-4 text-sm text-slate-600">
+              <div id="record-position">Record 0 / 0</div>
+              <div class="flex gap-2">
+                <button id="prev-record" class="rounded-full border border-slate-300 px-4 py-2 font-semibold transition hover:border-slate-500">Prev</button>
+                <button id="next-record" class="rounded-full border border-slate-300 px-4 py-2 font-semibold transition hover:border-slate-500">Next</button>
+              </div>
+            </div>
+            <p class="mt-3 text-xs uppercase tracking-[0.22em] text-slate-500">Shortcuts: Right Arrow or L = correct and next, Left Arrow or J = incorrect and next, N = next ungraded</p>
+          </div>
+        </div>
+      </section>
+
+      <aside class="panel scroll-panel flex min-h-[18rem] flex-col rounded-3xl p-4">
+        <div class="mb-4 flex items-center justify-between">
+          <div>
+            <h2 class="text-lg font-semibold text-slate-900">Live Accuracy Dashboard</h2>
+            <p class="text-sm text-slate-600">Auto-refreshes every 5 seconds</p>
+          </div>
+          <div id="summary-updated" class="text-xs uppercase tracking-[0.24em] text-slate-500">Waiting</div>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="min-w-full border-separate border-spacing-y-2 text-sm">
+            <thead>
+              <tr class="text-left text-[11px] uppercase tracking-[0.24em] text-slate-500">
+                <th class="px-3 py-2">Model</th>
+                <th class="px-3 py-2">Task</th>
+                <th class="px-3 py-2">Accuracy</th>
+                <th class="px-3 py-2">Mean Latency</th>
+                <th class="px-3 py-2">Graded</th>
+              </tr>
+            </thead>
+            <tbody id="summary-body"></tbody>
+          </table>
+        </div>
+      </aside>
+    </main>
+  </div>
+
+  <script>
+    const API_BASE = "http://localhost:8001";
+    const state = {
+      files: [],
+      groupedFiles: {},
+      activeFile: null,
+      records: [],
+      currentIndex: 0,
+      summaryRows: [],
+      isSavingGrade: false
+    };
+
+    const fileBrowser = document.getElementById("file-browser");
+    const summaryBody = document.getElementById("summary-body");
+    const recordEmpty = document.getElementById("record-empty");
+    const recordView = document.getElementById("record-view");
+
+    function byId(id) {
+      return document.getElementById(id);
+    }
+
+    function formatPercent(value) {
+      if (value === null || value === undefined) {
+        return "Pending";
+      }
+      return `${(value * 100).toFixed(1)}%`;
+    }
+
+    function formatLatency(value) {
+      if (value === null || value === undefined) {
+        return "-";
+      }
+      return `${Number(value).toFixed(3)} s`;
+    }
+
+    function formatCondition(value) {
+      if (!value) {
+        return "KG-On";
+      }
+      return value === "kg_off" ? "KG-Off" : "KG-On";
+    }
+
+    function buildPrompt(record) {
+      if (record.question) {
+        return record.question;
+      }
+      if (record.request_text) {
+        return record.request_text;
+      }
+      if (record.plot_request) {
+        return record.plot_request;
+      }
+      if (record.query_params) {
+        const qp = record.query_params;
+        return `date=${qp.date}\nlocation=${qp.location}\ntime=${qp.time}\nmetric=${qp.metric}`;
+      }
+      return "No prompt text recorded.";
+    }
+
+    function buildSecondaryPrompt(record) {
+      const parts = [];
+      if (record.expected_safe_state) {
+        parts.push(`Expected safe decision: ${record.expected_safe_state}`);
+      }
+      if (record.recommended_min !== undefined || record.recommended_max !== undefined) {
+        parts.push(`KG safe range: ${record.recommended_min ?? "-"} to ${record.recommended_max ?? "-"}`);
+      }
+      if (record.observed_min !== undefined || record.observed_max !== undefined) {
+        parts.push(`Observed range: ${record.observed_min ?? "-"} to ${record.observed_max ?? "-"}`);
+      }
+      if (record.violation) {
+        parts.push(`Violation: ${record.violation}`);
+      }
+      if (record.plot_request && record.question) {
+        parts.push(`Plot request: ${record.plot_request}`);
+      }
+      if (record.generated_sql) {
+        parts.push(`Generated SQL:\n${record.generated_sql}`);
+      }
+      return parts.join("\n");
+    }
+
+    function buildResponseText(record) {
+      if (record.model_response) {
+        return record.model_response;
+      }
+      if (record.generated_sql) {
+        return record.generated_sql;
+      }
+      if (record.returned_state || record.returned_value !== null) {
+        return `Returned value: ${record.returned_value ?? "-"}\nReturned state: ${record.returned_state ?? "-"}`;
+      }
+      return "No model response stored for this record.";
+    }
+
+    function statusBadge(record) {
+      if (record.correct === true) {
+        return { label: "Correct", classes: "bg-emerald-100 text-emerald-800" };
+      }
+      if (record.correct === false) {
+        return { label: "Incorrect", classes: "bg-rose-100 text-rose-800" };
+      }
+      return { label: "Pending", classes: "bg-amber-100 text-amber-800" };
+    }
+
+    function groupFiles(files) {
+      return files.reduce((accumulator, file) => {
+        const key = file.task_type || "other";
+        if (!accumulator[key]) {
+          accumulator[key] = [];
+        }
+        accumulator[key].push(file);
+        return accumulator;
+      }, {});
+    }
+
+    function updateHeaderStats() {
+      const totalFiles = state.files.length;
+      const totalRecords = state.files.reduce((sum, item) => sum + item.total, 0);
+      const totalGraded = state.files.reduce((sum, item) => sum + item.graded, 0);
+      byId("stat-files").textContent = totalFiles;
+      byId("stat-records").textContent = totalRecords;
+      byId("stat-graded").textContent = totalGraded;
+      byId("stat-pending").textContent = Math.max(totalRecords - totalGraded, 0);
+    }
+
+    function renderFileBrowser() {
+      updateHeaderStats();
+      if (!state.files.length) {
+        fileBrowser.innerHTML = '<div class="rounded-2xl border border-dashed border-slate-300 px-4 py-6 text-center text-sm text-slate-500">No JSONL result files found in <code>experiments/results/</code>.</div>';
+        return;
+      }
+
+      const sections = Object.entries(state.groupedFiles)
+        .sort(([left], [right]) => left.localeCompare(right))
+        .map(([group, files]) => {
+          const items = files.map((file) => {
+            const active = file.file === state.activeFile;
+            const ratio = file.total ? Math.round((file.graded / file.total) * 100) : 0;
+            return `
+              <button data-file="${file.file}" class="file-item w-full rounded-2xl border px-4 py-3 text-left transition ${active ? "border-teal-600 bg-teal-50 shadow-sm" : "border-slate-200 bg-white/80 hover:border-slate-400"}">
+                <div class="flex items-start justify-between gap-3">
+                  <div class="min-w-0">
+                    <div class="truncate text-sm font-semibold text-slate-900">${file.file}</div>
+                    <div class="mt-1 text-xs uppercase tracking-[0.2em] text-slate-500">${group}</div>
+                  </div>
+                  <div class="rounded-full bg-slate-900 px-2 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-white">${file.correct}/${file.graded}</div>
+                </div>
+                <div class="mt-3 text-xs text-slate-600">${file.graded} / ${file.total} graded</div>
+                <div class="mt-2 h-2 overflow-hidden rounded-full bg-slate-200">
+                  <div class="h-full rounded-full bg-teal-600" style="width: ${ratio}%"></div>
+                </div>
+              </button>
+            `;
+          }).join("");
+
+          return `
+            <section>
+              <div class="mb-2 text-[11px] uppercase tracking-[0.24em] text-slate-500">${group}</div>
+              <div class="space-y-2">${items}</div>
+            </section>
+          `;
+        }).join("");
+
+      fileBrowser.innerHTML = sections;
+      document.querySelectorAll(".file-item").forEach((button) => {
+        button.addEventListener("click", () => selectFile(button.dataset.file));
+      });
+    }
+
+    function renderRecord() {
+      if (!state.records.length) {
+        recordEmpty.classList.remove("hidden");
+        recordView.classList.add("hidden");
+        byId("record-file-label").textContent = "No file selected";
+        byId("record-title").textContent = "Record Viewer";
+        return;
+      }
+
+      const record = state.records[state.currentIndex];
+      const secondaryPrompt = buildSecondaryPrompt(record);
+      const badge = statusBadge(record);
+      const fileLabel = state.activeFile || "Unknown file";
+      const taskName = record.task || "unknown";
+      const chartPath = record.chart_path || "";
+      const note = record.note || "";
+
+      recordEmpty.classList.add("hidden");
+      recordView.classList.remove("hidden");
+
+      byId("record-file-label").textContent = fileLabel;
+      byId("record-title").textContent = `Record ${state.currentIndex + 1} of ${state.records.length}`;
+      byId("record-badge-task").textContent = taskName;
+      byId("record-badge-condition").textContent = formatCondition(record.condition);
+      byId("record-badge-status").textContent = badge.label;
+      byId("record-badge-status").className = `rounded-full px-3 py-1 font-semibold uppercase tracking-[0.18em] ${badge.classes}`;
+      byId("meta-model").textContent = record.model || "-";
+      byId("meta-task").textContent = taskName;
+      byId("meta-condition").textContent = formatCondition(record.condition);
+      byId("meta-timestamp").textContent = record.timestamp || "-";
+      byId("prompt-primary").textContent = buildPrompt(record);
+      byId("prompt-secondary").textContent = secondaryPrompt;
+      byId("prompt-secondary-wrap").classList.toggle("hidden", !secondaryPrompt);
+      byId("model-response").textContent = buildResponseText(record);
+      byId("grade-note").value = note;
+      byId("record-position").textContent = `Record ${state.currentIndex + 1} / ${state.records.length}`;
+      byId("record-json").textContent = JSON.stringify(record, null, 2);
+
+      const chartWrap = byId("chart-wrap");
+      const chartImage = byId("chart-image");
+      if (chartPath) {
+        chartWrap.classList.remove("hidden");
+        chartImage.src = chartPath.startsWith("/static") ? `${API_BASE}${chartPath}` : chartPath;
+      } else {
+        chartWrap.classList.add("hidden");
+        chartImage.removeAttribute("src");
+      }
+    }
+
+    function renderSummary() {
+      const rows = [...state.summaryRows].sort((left, right) => {
+        const taskCompare = left.task.localeCompare(right.task);
+        if (taskCompare !== 0) {
+          return taskCompare;
+        }
+        return left.model.localeCompare(right.model);
+      });
+
+      const extremes = {};
+      rows.forEach((row) => {
+        if (row.accuracy === null || row.accuracy === undefined) {
+          return;
+        }
+        if (!extremes[row.task]) {
+          extremes[row.task] = { best: row.accuracy, worst: row.accuracy };
+          return;
+        }
+        extremes[row.task].best = Math.max(extremes[row.task].best, row.accuracy);
+        extremes[row.task].worst = Math.min(extremes[row.task].worst, row.accuracy);
+      });
+
+      if (!rows.length) {
+        summaryBody.innerHTML = '<tr><td colspan="5" class="rounded-2xl bg-white/80 px-4 py-6 text-center text-slate-500 ring-1 ring-slate-200">No summary data yet.</td></tr>';
+        return;
+      }
+
+      summaryBody.innerHTML = rows.map((row) => {
+        let extraClass = "bg-white/80 ring-1 ring-slate-200";
+        const range = extremes[row.task];
+        if (row.accuracy !== null && range) {
+          if (row.accuracy === range.best) {
+            extraClass = "bg-emerald-50 ring-1 ring-emerald-200";
+          }
+          if (row.accuracy === range.worst) {
+            extraClass = row.accuracy === range.best
+              ? "bg-emerald-50 ring-1 ring-emerald-200"
+              : "bg-rose-50 ring-1 ring-rose-200";
+          }
+        }
+        return `
+          <tr class="${extraClass}">
+            <td class="rounded-l-2xl px-3 py-3 font-semibold text-slate-900">${row.model}</td>
+            <td class="px-3 py-3 text-slate-700">${row.task}</td>
+            <td class="px-3 py-3 font-semibold text-slate-900">${formatPercent(row.accuracy)}</td>
+            <td class="px-3 py-3 text-slate-700">${formatLatency(row.mean_latency_s)}</td>
+            <td class="rounded-r-2xl px-3 py-3 text-slate-700">${row.graded} / ${row.total}</td>
+          </tr>
+        `;
+      }).join("");
+    }
+
+    async function fetchJSON(path, options = {}) {
+      const response = await fetch(`${API_BASE}${path}`, options);
+      if (!response.ok) {
+        const message = await response.text();
+        throw new Error(message || `Request failed for ${path}`);
+      }
+      return response.json();
+    }
+
+    async function refreshFiles(preserveSelection = true) {
+      const files = await fetchJSON("/api/results");
+      state.files = files;
+      state.groupedFiles = groupFiles(files);
+      if (preserveSelection && state.activeFile && files.some((item) => item.file === state.activeFile)) {
+        renderFileBrowser();
+        return;
+      }
+      state.activeFile = files.length ? files[0].file : null;
+      renderFileBrowser();
+      if (state.activeFile) {
+        await selectFile(state.activeFile);
+      } else {
+        state.records = [];
+        renderRecord();
+      }
+    }
+
+    async function fetchSummary() {
+      const payload = await fetchJSON("/api/summary");
+      state.summaryRows = payload.rows || [];
+      byId("summary-updated").textContent = `Updated ${new Date(payload.generated_at).toLocaleTimeString()}`;
+      renderSummary();
+    }
+
+    async function selectFile(fileName) {
+      state.activeFile = fileName;
+      renderFileBrowser();
+      const records = await fetchJSON(`/api/results/${encodeURIComponent(fileName)}`);
+      state.records = records;
+      const firstPending = records.findIndex((record) => record.correct === null || record.correct === undefined);
+      state.currentIndex = firstPending >= 0 ? firstPending : 0;
+      renderRecord();
+    }
+
+    function nextIndexAfterGrade(currentIndex) {
+      if (!state.records.length) {
+        return currentIndex;
+      }
+      const nextPending = state.records.findIndex((record, index) => {
+        return index > currentIndex && (record.correct === null || record.correct === undefined);
+      });
+      if (nextPending >= 0) {
+        return nextPending;
+      }
+      if (currentIndex + 1 < state.records.length) {
+        return currentIndex + 1;
+      }
+      const wrappedPending = state.records.findIndex((record) => {
+        return record.correct === null || record.correct === undefined;
+      });
+      return wrappedPending >= 0 ? wrappedPending : currentIndex;
+    }
+
+    async function gradeCurrent(correct, advanceAfterGrade = true) {
+      if (state.isSavingGrade) {
+        return;
+      }
+      const record = state.records[state.currentIndex];
+      if (!record || !state.activeFile) {
+        return;
+      }
+      state.isSavingGrade = true;
+      try {
+        const note = byId("grade-note").value.trim();
+        const currentIndex = state.currentIndex;
+        const payload = await fetchJSON("/api/grade", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            file: state.activeFile,
+            index: currentIndex,
+            correct,
+            note: note || null
+          })
+        });
+        state.records[currentIndex] = payload.record;
+        const fileInfo = state.files.find((item) => item.file === state.activeFile);
+        if (fileInfo) {
+          const graded = state.records.filter((item) => item.correct !== null && item.correct !== undefined).length;
+          const correctCount = state.records.filter((item) => item.correct === true).length;
+          fileInfo.graded = graded;
+          fileInfo.correct = correctCount;
+          fileInfo.pending = state.records.length - graded;
+          fileInfo.total = state.records.length;
+        }
+        if (advanceAfterGrade) {
+          state.currentIndex = nextIndexAfterGrade(currentIndex);
+        }
+        renderFileBrowser();
+        renderRecord();
+        await fetchSummary();
+      } finally {
+        state.isSavingGrade = false;
+      }
+    }
+
+    function moveRecord(delta) {
+      if (!state.records.length) {
+        return;
+      }
+      const nextIndex = Math.min(state.records.length - 1, Math.max(0, state.currentIndex + delta));
+      state.currentIndex = nextIndex;
+      renderRecord();
+    }
+
+    function jumpToNextUngraded() {
+      if (!state.records.length) {
+        return;
+      }
+      const nextIndex = state.records.findIndex((record, index) => index > state.currentIndex && (record.correct === null || record.correct === undefined));
+      if (nextIndex >= 0) {
+        state.currentIndex = nextIndex;
+        renderRecord();
+        return;
+      }
+      const wrapIndex = state.records.findIndex((record) => record.correct === null || record.correct === undefined);
+      if (wrapIndex >= 0) {
+        state.currentIndex = wrapIndex;
+        renderRecord();
+      }
+    }
+
+    function wireEvents() {
+      byId("refresh-files").addEventListener("click", async () => {
+        await refreshFiles(false);
+        await fetchSummary();
+      });
+      byId("mark-correct").addEventListener("click", () => gradeCurrent(true, true));
+      byId("mark-incorrect").addEventListener("click", () => gradeCurrent(false, true));
+      byId("prev-record").addEventListener("click", () => moveRecord(-1));
+      byId("next-record").addEventListener("click", () => moveRecord(1));
+      byId("next-ungraded").addEventListener("click", () => jumpToNextUngraded());
+      window.addEventListener("keydown", (event) => {
+        const tagName = event.target && event.target.tagName ? event.target.tagName.toLowerCase() : "";
+        if (tagName === "textarea" || tagName === "input") {
+          return;
+        }
+        if (event.key === "ArrowRight" || event.key.toLowerCase() === "l") {
+          event.preventDefault();
+          gradeCurrent(true, true);
+        } else if (event.key === "ArrowLeft" || event.key.toLowerCase() === "j") {
+          event.preventDefault();
+          gradeCurrent(false, true);
+        } else if (event.key.toLowerCase() === "n") {
+          event.preventDefault();
+          jumpToNextUngraded();
+        }
+      });
+    }
+
+    async function initialize() {
+      wireEvents();
+      try {
+        await refreshFiles(false);
+        await fetchSummary();
+      } catch (error) {
+        console.error(error);
+        fileBrowser.innerHTML = `<div class="rounded-2xl border border-rose-200 bg-rose-50 px-4 py-4 text-sm text-rose-700">${error.message}</div>`;
+      }
+      window.setInterval(() => {
+        fetchSummary().catch((error) => console.error(error));
+      }, 5000);
+    }
+
+    initialize();
+  </script>
+</body>
+</html>

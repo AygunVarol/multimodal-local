@@ -1,0 +1,2 @@
+
+The readings stayed within the safe limit throughout the entire day. The line representing the temperature does not cross any safety thresholds on the graph provided.

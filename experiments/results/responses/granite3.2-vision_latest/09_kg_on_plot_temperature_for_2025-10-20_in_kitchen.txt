@@ -1,0 +1,2 @@
+
+The readings stayed within the safe limit throughout the entire day. The line graph shows that all temperature readings remained between 20°C and 26°C, which is considered a safe range for indoor environments. There are no instances where the temperature exceeds these limits.

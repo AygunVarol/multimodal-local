@@ -1,0 +1,2 @@
+within safe limit  
+The chart shows humidity values ranging from approximately 26% to 32% RH. Typical safe humidity limits for indoor environments (like offices) are often 30–60% RH. Since all readings fall within this range (highest value ~32% RH), the humidity remained within the safe limit.

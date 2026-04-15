@@ -1,0 +1,3 @@
+**Within safe limit.**
+
+The humidity readings mostly stayed between 30% and 60% throughout the day, with minor fluctuations. The peak values did not exceed 65%, and no sustained period exceeded the recommended range.

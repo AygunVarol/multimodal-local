@@ -1,0 +1,1 @@
+Outside safe limit. The temperature fluctuated significantly throughout the day, with readings occasionally exceeding 25°C.

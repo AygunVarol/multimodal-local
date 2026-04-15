@@ -1,0 +1,3 @@
+**Within safe limit.**
+
+The humidity readings (30–60%) remained consistently below 65% throughout the day, never exceeding the recommended upper limit. The chart shows values mostly below 40% RH, well within the 30–60% range.

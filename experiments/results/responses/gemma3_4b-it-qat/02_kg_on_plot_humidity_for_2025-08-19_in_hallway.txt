@@ -1,0 +1,1 @@
+Outside safe limit. The humidity reading dipped below 30% at 16:00 and remained low throughout the day.

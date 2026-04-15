@@ -1,0 +1,2 @@
+within safe limit  
+The chart shows humidity levels consistently below 60% (the upper limit of the recommended range of 30.0 to 60.0%), with peaks around 35–40%—well within the safe range.

@@ -1,0 +1,2 @@
+
+The readings stayed within the safe limit throughout the entire day. The line graph shows that all temperature readings are consistently above the lower threshold (20°C) and below the upper threshold (26°C), indicating that the temperatures were always within the safe range for human occupancy.

@@ -1,0 +1,2 @@
+within safe limit  
+The temperature chart shows values consistently between 21°C and 23°C (peaks near 23°C), which is within the recommended range of 20.0 to 26.0°C. No readings exceed 26°C or fall below 20°C.

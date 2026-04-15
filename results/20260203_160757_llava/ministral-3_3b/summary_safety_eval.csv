@@ -1,0 +1,2 @@
+accuracy,safe_accuracy,unsafe_accuracy,tp,tn,fp,fn,latency_mean_s,latency_min_s,latency_max_s,latency_median_s,latency_p95_s
+0.6750,0.3500,1.0000,21,60,0,39,3.0222,2.4876,5.3382,2.7733,4.4842

@@ -1,0 +1,3 @@
+Within safe limit.
+
+The humidity readings mostly hover around 25% to 27%, which is generally considered within safe limits for human comfort and health. The chart shows no significant spikes that exceed typical safe humidity thresholds.

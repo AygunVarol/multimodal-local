@@ -1,0 +1,2 @@
+within safe limit  
+The temperature readings range from approximately 21.0°C to 23.0°C (peaking around 16:00), which is well below typical safe limits for indoor environments (e.g., 25°C or higher). No values exceed or fall below a reasonable safe threshold for occupancy.

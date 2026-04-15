@@ -1,0 +1,2 @@
+within safe limit  
+The chart shows temperature readings consistently between 20.0°C and 26.0°C (the recommended safe range per KG facts), with no data points exceeding 26.0°C or dropping below 20.0°C.

@@ -1,0 +1,1 @@
+Outside safe limit. The temperature fluctuated between 19°C and 26°C, exceeding the recommended range of 20.0 to 26.0°C at times.

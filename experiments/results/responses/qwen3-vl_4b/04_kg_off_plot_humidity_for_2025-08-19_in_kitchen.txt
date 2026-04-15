@@ -1,0 +1,2 @@
+outside safe limit  
+The chart shows humidity levels ranging from approximately 19% to 30.5%. Typical indoor humidity safe limits are 30–50% (too low: dryness issues; too high: mold/moisture). Here, the lowest reading (≈19%) is below the lower safe limit, and the peak (≈30.5%) is near the upper limit but still slightly low. Thus, readings fall outside the safe range due to the low humidity levels.

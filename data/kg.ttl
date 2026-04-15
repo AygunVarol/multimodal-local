@@ -1,0 +1,62 @@
+
+@prefix ex: <http://example.org/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+
+# Classes & properties
+ex:Location a rdfs:Class .
+ex:Metric a rdfs:Class .
+ex:PervasiveDisplay a rdfs:Class .
+ex:Policy a rdfs:Class .
+ex:Dataset a rdfs:Class .
+ex:atLocation a rdf:Property .
+ex:appliesTo a rdf:Property .
+ex:coversLocation a rdf:Property .
+ex:sourceFile a rdf:Property .
+ex:recommendedMin a rdf:Property .
+ex:recommendedMax a rdf:Property .
+
+# Locations
+ex:Kitchen a ex:Location ; rdfs:label "kitchen" .
+ex:Hallway a ex:Location ; rdfs:label "hallway" .
+ex:Office a ex:Location ; rdfs:label "office" .
+
+# Displays
+ex:Display1 a ex:PervasiveDisplay ; ex:atLocation ex:Kitchen ; rdfs:label "Kitchen Display" .
+ex:Display2 a ex:PervasiveDisplay ; ex:atLocation ex:Hallway ; rdfs:label "Hallway Display" .
+ex:DisplayOffice a ex:PervasiveDisplay ; ex:atLocation ex:Office ; rdfs:label "Office Display" .
+
+# Metrics and recommended ranges
+ex:temperature_c a ex:Metric ; rdfs:label "temperature" ;
+  ex:recommendedMin "20"^^xsd:float ;
+  ex:recommendedMax "26"^^xsd:float .
+
+ex:humidity_rh a ex:Metric ; rdfs:label "humidity" ;
+  ex:recommendedMin "30"^^xsd:float ;
+  ex:recommendedMax "60"^^xsd:float .
+
+ex:pressure_hpa a ex:Metric ; rdfs:label "pressure" .
+ex:IAQ_proxy a ex:Metric ; rdfs:label "iaq score" .
+ex:gas_resistance_ohms a ex:Metric ; rdfs:label "gas resistance" .
+
+# Policies
+ex:PolicyVentilate a ex:Policy ;
+  rdfs:label "Ventilate when temperature > 28 C or humidity > 65%" ;
+  ex:appliesTo ex:Kitchen, ex:Hallway, ex:Office .
+
+# Datasets (linked to locations, source files recorded)
+ex:DatasetOffice a ex:Dataset ;
+  rdfs:label "office dataset" ;
+  ex:coversLocation ex:Office ;
+  ex:sourceFile "office_measurements_IAQ_1h_avg.csv" .
+
+ex:DatasetKitchen a ex:Dataset ;
+  rdfs:label "kitchen dataset" ;
+  ex:coversLocation ex:Kitchen ;
+  ex:sourceFile "kitchen_measurements_IAQ_1h_avg.csv" .
+
+ex:DatasetHallway a ex:Dataset ;
+  rdfs:label "hallway dataset" ;
+  ex:coversLocation ex:Hallway ;
+  ex:sourceFile "hallway_measurements_IAQ_1h_avg.csv" .

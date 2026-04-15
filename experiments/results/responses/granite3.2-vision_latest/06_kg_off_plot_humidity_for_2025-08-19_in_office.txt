@@ -1,0 +1,2 @@
+
+The readings stayed within the safe limit throughout the entire day. The blue line representing humidity does not cross any red lines that would indicate a safe limit.

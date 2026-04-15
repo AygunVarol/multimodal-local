@@ -1,0 +1,1 @@
+Outside safe limit. The humidity readings fluctuated significantly throughout the day, frequently exceeding 65%, triggering the ventilation policy.

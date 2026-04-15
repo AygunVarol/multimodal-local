@@ -1,0 +1,1 @@
+within safe limit. The humidity levels range from approximately 26% to 31.2% on the chart, which falls within a typical safe indoor humidity range (e.g., 30–50% for most offices). Since the maximum recorded value (around 31.2%) is below common safe limits (like 40–50%), the readings stayed within safe limits.

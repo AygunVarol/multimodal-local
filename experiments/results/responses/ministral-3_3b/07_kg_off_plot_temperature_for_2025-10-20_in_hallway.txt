@@ -1,0 +1,3 @@
+Outside safe limit.
+
+The temperature readings dip below approximately 22.4°C multiple times throughout the day, indicating it went outside the typical safe range.

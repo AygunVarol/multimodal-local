@@ -1,0 +1,1 @@
+Outside safe limit. The humidity readings fluctuated above 65% at various times during the day, triggering the Ventilate policy.

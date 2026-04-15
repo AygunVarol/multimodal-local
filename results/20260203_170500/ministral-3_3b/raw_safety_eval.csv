@@ -1,0 +1,17 @@
+true_label,pred_label,is_correct,latency_s,model_text,image_path
+SAFE,UNSAFE,False,2.817910,UNSAFE,experiment\safe\100_1414.jpg
+SAFE,UNSAFE,False,2.528094,UNSAFE,experiment\safe\int494.jpg
+SAFE,UNSAFE,False,2.588680,UNSAFE,experiment\safe\b9.jpg
+SAFE,SAFE,True,2.805376,SAFE,experiment\safe\img_1115.jpg
+SAFE,SAFE,True,2.422600,SAFE,experiment\safe\bed109.jpg
+SAFE,UNSAFE,False,2.589746,UNSAFE,experiment\safe\SD_00_01_51254_02_l.jpg
+SAFE,UNSAFE,False,2.612352,UNSAFE,experiment\safe\aa041720.jpg
+SAFE,SAFE,True,2.597096,SAFE,experiment\safe\bathroom2.jpg
+UNSAFE,UNSAFE,True,3.036737,UNSAFE,experiment\unsafe\2227_jpg.rf.94e09fb8ec1cf15a6739b3845c2820fb.jpg
+UNSAFE,UNSAFE,True,2.443107,UNSAFE,experiment\unsafe\H_00352_png.rf.3c70a581c2f489e3af06678462802d2e.jpg
+UNSAFE,UNSAFE,True,3.705446,UNSAFE,experiment\unsafe\b_0034_jpg.rf.ba57c6f555c4269d9328d3bff8445dcb.jpg
+UNSAFE,UNSAFE,True,2.616192,UNSAFE,experiment\unsafe\test12390_jpg.rf.7c04f68e1cf15f41d5f3e0989ee33eff.jpg
+UNSAFE,UNSAFE,True,2.593328,UNSAFE,experiment\unsafe\33_jpg.rf.834e250cb95766fc12e05aa6d9105ac4.jpg
+UNSAFE,UNSAFE,True,2.479322,UNSAFE,experiment\unsafe\54_jpg.rf.1a2f4daa1fd73db5c68f3d68bb0e069f.jpg
+UNSAFE,UNSAFE,True,2.722030,UNSAFE,experiment\unsafe\1244_jpg.rf.81e79a588a769c79eca987eb5d4a97a3.jpg
+UNSAFE,UNSAFE,True,2.908885,UNSAFE,experiment\unsafe\part7_mp4-129_jpg.rf.6f152e4a714828f291a085f7dc6f9e78.jpg

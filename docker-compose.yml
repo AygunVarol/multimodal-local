@@ -1,0 +1,16 @@
+
+services:
+  api:
+    build: ./backend
+    environment:
+      - OLLAMA_BASE_URL=${OLLAMA_BASE_URL:-http://host.docker.internal:11434}
+      - OLLAMA_MODELS=${OLLAMA_MODELS:-ministral-3:3b,qwen3-vl:4b,gemma3:4b-it-qat,granite3.2-vision:latest}
+      - OLLAMA_MODEL=${OLLAMA_MODEL:-gemma3:4b-it-qat}
+      - DATA_DIR=/data
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend/app:/app/app
+      - ./data:/data
+    extra_hosts:
+      - "host.docker.internal:host-gateway"

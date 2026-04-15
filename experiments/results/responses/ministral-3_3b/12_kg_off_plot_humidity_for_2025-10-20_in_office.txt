@@ -1,0 +1,3 @@
+Within safe limit.
+
+The humidity levels fluctuated between approximately 26% and 31%, which is generally considered within a safe range for most environments.

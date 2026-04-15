@@ -1,0 +1,2 @@
+outside safe limit  
+The graph shows humidity ranging from approximately 26% to 31%. A typical safe indoor humidity range for health is 30–50%, so the minimum reading (26%) falls below this lower threshold, indicating readings were outside the safe limit.

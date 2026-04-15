@@ -1,0 +1,2 @@
+
+The readings stayed within the safe limit throughout the entire day. This is indicated by all the data points being consistently above the lower boundary line and below the upper boundary line of the graph.

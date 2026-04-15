@@ -1,0 +1,3 @@
+**Within safe limit.**
+
+The temperature readings mostly stayed between approximately **18°C and 24°C**, which is generally considered a safe indoor range. The highest peaks (around 26°C) were short-lived and did not exceed typical comfort thresholds for most people.

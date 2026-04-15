@@ -1,0 +1,2 @@
+outside safe limit  
+The chart shows humidity values consistently below 30% (below the recommended range of 30.0 to 60.0%). While low humidity can sometimes be unhealthy, the specified "safe limit" here is the recommended range, so readings below 30% are outside the safe limit.

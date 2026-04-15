@@ -1,0 +1,2 @@
+outside safe limit  
+The chart shows humidity values dropping below 30% (e.g., ~28% at 23:00 Oct 20), which is below the recommended safe range of 30.0–60.0. Though most readings stay within 30–60%, the initial period (late night) is below the lower limit, so not all readings stayed within the safe limit.

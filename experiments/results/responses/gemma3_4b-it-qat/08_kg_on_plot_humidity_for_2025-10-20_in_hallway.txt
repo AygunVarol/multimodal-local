@@ -1,0 +1,1 @@
+Outside safe limit. The humidity fluctuated between 28.0% and 34.0%, exceeding the recommended range of 30.0% to 60.0%.

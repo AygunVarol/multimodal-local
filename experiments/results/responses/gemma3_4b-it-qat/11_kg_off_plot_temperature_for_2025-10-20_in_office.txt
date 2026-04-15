@@ -1,0 +1,1 @@
+Outside safe limit. The temperature spiked above 22.0°C around 14:00, indicating it was outside the recommended safe limit for a prolonged period.

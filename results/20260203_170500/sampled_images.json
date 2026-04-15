@@ -1,0 +1,24 @@
+{
+  "seed": 31,
+  "n_per_class": 8,
+  "safe": [
+    "experiment\\safe\\100_1414.jpg",
+    "experiment\\safe\\int494.jpg",
+    "experiment\\safe\\b9.jpg",
+    "experiment\\safe\\img_1115.jpg",
+    "experiment\\safe\\bed109.jpg",
+    "experiment\\safe\\SD_00_01_51254_02_l.jpg",
+    "experiment\\safe\\aa041720.jpg",
+    "experiment\\safe\\bathroom2.jpg"
+  ],
+  "unsafe": [
+    "experiment\\unsafe\\2227_jpg.rf.94e09fb8ec1cf15a6739b3845c2820fb.jpg",
+    "experiment\\unsafe\\H_00352_png.rf.3c70a581c2f489e3af06678462802d2e.jpg",
+    "experiment\\unsafe\\b_0034_jpg.rf.ba57c6f555c4269d9328d3bff8445dcb.jpg",
+    "experiment\\unsafe\\test12390_jpg.rf.7c04f68e1cf15f41d5f3e0989ee33eff.jpg",
+    "experiment\\unsafe\\33_jpg.rf.834e250cb95766fc12e05aa6d9105ac4.jpg",
+    "experiment\\unsafe\\54_jpg.rf.1a2f4daa1fd73db5c68f3d68bb0e069f.jpg",
+    "experiment\\unsafe\\1244_jpg.rf.81e79a588a769c79eca987eb5d4a97a3.jpg",
+    "experiment\\unsafe\\part7_mp4-129_jpg.rf.6f152e4a714828f291a085f7dc6f9e78.jpg"
+  ]
+}

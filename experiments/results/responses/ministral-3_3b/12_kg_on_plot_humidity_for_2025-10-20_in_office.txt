@@ -1,0 +1,3 @@
+**Within safe limit.**
+
+The humidity readings (30–60%) remained consistently below the recommended upper limit of 60% throughout the day. No spikes exceed this range.

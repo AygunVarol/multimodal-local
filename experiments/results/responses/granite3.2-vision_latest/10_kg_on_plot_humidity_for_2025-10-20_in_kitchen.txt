@@ -1,0 +1,2 @@
+
+The readings stayed within the safe limit throughout the entire day. The line representing the humidity levels does not cross any of the safety thresholds (25% to 60%) and remains consistently below these limits for the duration of the observed period.

@@ -1,0 +1,2 @@
+within safe limit  
+All temperature readings on the chart fall between approximately 22.4°C and 22.6°C, which is a narrow, consistent range—likely within a safe or typical threshold for the location’s climate conditions.

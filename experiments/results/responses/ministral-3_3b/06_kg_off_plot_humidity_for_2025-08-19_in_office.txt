@@ -1,0 +1,3 @@
+Within safe limit.
+
+The humidity readings mostly fluctuate between approximately 26% and 28%, which is generally within the typical safe range for indoor environments.

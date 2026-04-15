@@ -1,0 +1,1 @@
+Outside safe limit. The humidity fluctuated above 27% throughout the day, exceeding the generally recommended safe limit of 60%.
