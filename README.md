@@ -282,4 +282,24 @@ This project is released under the terms of the [MIT License](LICENSE).
 
 ---
 
+## Citation
+
+If you use this code or build on the plot-and-ask workflow, please cite our paper:
+
+> Varol, A., Shaikh, A., Motlagh, N. H., Leino, M., & Virkki, J. (2026, August). Plot-and-Ask: Multimodal Local LLMs in Smart Environments for Visual IoT Analytics. In *Proceedings of the 21st Conference on Computer Science and Intelligence Systems (FedCSIS)* (ACSIS, Vol. 47, pp. 609–614). PTI. https://doi.org/10.15439/2026F4180
+
+```bibtex
+@inproceedings{varol2026plot,
+  title     = {Plot-and-Ask: Multimodal Local LLMs in Smart Environments for Visual IoT Analytics},
+  author    = {Varol, Ayg{\"u}n and Shaikh, Asif and Motlagh, Naser Hossein and Leino, Mirka and Virkki, Johanna},
+  booktitle = {Proceedings of the 21st Conference on Computer Science and Intelligence Systems (FedCSIS)},
+  series    = {Annals of Computer Science and Information Systems},
+  volume    = {47},
+  pages     = {609--614},
+  year      = {2026},
+  publisher = {PTI},
+  doi       = {10.15439/2026F4180}
+}
+```
+
 Questions or ideas? Open an issue, or experiment locally by asking the agent about your latest IAQ trends and policy compliance.
